@@ -43,7 +43,7 @@ for i in range(raw_dict.height):
 
 avg_k_in = []
 avg_k_out = []
-'''
+
 #Create list of graphs (Tissue specific )
 list_graphs = []
 for i in range (ss.height):
@@ -101,7 +101,7 @@ np.save('per_node_out1.npy', np.array(list(per_node_out.values())))
 print(len(list_graphs))
 print(np.mean(avg_k_in))
 print(np.mean(avg_k_out))
-'''
+
 
 filepath = (f"More_Github_Bullshit/Ovary/Metabolites-based/Metabolites-based_tissue/meanSum_TCGA-04-1331-01A.graphml")
 G = nx.read_graphml(filepath)
@@ -121,15 +121,17 @@ scaled_weights = [w * 0.1 for w in edge_weights]
 #plt.figure(figsize=(20, 16))
 #nx.draw_networkx_edges(G, pos, width=scaled_weights)
 
-degrees = [deg for _, deg in G.degree()] # For any graph G
+degrees = [deg for _, deg in G.in_degree()] # For any graph G
 
 vals, freq = np.unique(degrees, return_counts=True)
 
 plt.scatter(vals, freq, marker="o")
 plt.xlabel("Degree")
 plt.ylabel("Frequency")
-plt.title("Degree Distribution (Ovarian Cancer Tissue)")
+plt.title("In-Degree Distribution (Ovarian Cancer Tissue)")
 plt.show()
+
+
 
 #create list of graphs (PGDSMM)
 #list_graphs = []
